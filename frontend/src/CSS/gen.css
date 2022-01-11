@@ -1,0 +1,9 @@
+.flex {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}

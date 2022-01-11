@@ -1,0 +1,41 @@
+.navbar {
+  width: 100vw;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbarul {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+}
+
+.navbarlink {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-decoration: none;
+  color: white;
+  padding-inline: 50px;
+}
+
+.navbarlink.active {
+  color: green;
+  cursor: default;
+}
+
+.spacer {
+  width: 100vw;
+  margin-top: 120px;
+}
+
+.logoutbtn {
+  position: fixed;
+  top: 20;
+  right: 20px;
+  color: white;
+}
