@@ -6,6 +6,6 @@ app.use(cors());
 
 require("./routes")(app);
 
-PORT = 8080;
+const PORT = 8080;
 
 app.listen(PORT, () => console.log("Fedex tracking search server running!"));
