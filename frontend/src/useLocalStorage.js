@@ -1,29 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import areObjectsEqual from "./areObjectsEqual";
 
 export default function useLocalStorage(key) {
-  const existingData = JSON.parse(localStorage.getItem(key));
-  const [data, setData] = useState(!existingData ? [] : existingData);
+  const [returnData, setReturnData] = useState(JSON.parse(localStorage.getItem(key)) || []);
 
-  const setter = (newdata) => {
-    if (!data) {
-      localStorage.setItem(key, JSON.stringify(newdata));
-      setData(newdata);
-      return;
-    }
+  useEffect(() => {
+    if (returnData.length === 0) return;
+    localStorage.setItem(key, JSON.stringify(returnData));
+  }, [returnData]);
 
-    if (data && data.some(({ id }) => id == newdata.id)) {
-      console.log("item already exists");
-      return;
-    }
+  function addItem(newItem) {
+    //check if item exists
+    if (returnData.some(item => areObjectsEqual(item, newItem))) return;
 
-    localStorage.setItem(key, JSON.stringify([newdata, ...data]));
-    setData((ps) => [newdata, ...ps]);
-  };
+    setReturnData(ps => [newItem, ...ps]);
+  }
 
   const clear = () => {
-    localStorage.clear();
-    setData([]);
+    localStorage.removeItem(key);
+    setReturnData([]);
   };
 
-  return [data.slice(0, 3), setter, clear];
+  return [returnData, addItem, clear];
 }
